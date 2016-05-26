@@ -32,6 +32,8 @@ public class RoverServer {
     
     public void start()
     {
+        SerialFromArduino ser = new SerialFromArduino();
+        ser.initialize();
         try
         {
             ServerSocket serverSocket = new ServerSocket(port);
@@ -59,15 +61,17 @@ public class RoverServer {
         }
     }
     public static void main(String[] args) {
-        int port;
-        if(args.length != 1)
-        {
-            System.out.println("Usage: java -jar example.jar [port]");
-            return;
-        }
-        port = Integer.parseInt(args[0]);
+        int port = 8092;
+        
+//        if(args.length != 1)
+//        {
+//            System.out.println("Usage: java -jar example.jar [port]");
+//            return;
+//        }
+        //port = Integer.parseInt(args[0]);
         RoverServer iutserver = new RoverServer(port);
         iutserver.start();
+        
     }
     
     class RoverClient extends Thread
